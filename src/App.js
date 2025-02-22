@@ -78,7 +78,7 @@ const App = () => {
             <tbody>
               {produtos.map((produto, index) => (
                 <tr key={index}>
-                  <td>{produto.descricao}</td>
+                  <td className="fw-bold">{produto.descricao}</td>
                   <td>{produto.estoque}</td>
                 </tr>
               ))}
