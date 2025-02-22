@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="container mt-5 text-center">
       <div className="card p-4 shadow-lg border-0" style={{ backgroundColor: "#ffe6f2" }}>
-        <h1 className="mb-4" style={{ color: "#d63384" }}>📊 Estoque Mais Gata</h1>
+        <h1 className="mb-4" style={{ color: "#d63384" }}>📊 Gerador de tabelas personalizadas</h1>
         <input
           type="file"
           className="form-control mb-3"
