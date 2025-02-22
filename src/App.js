@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="container mt-5 text-center">
       <div className="card p-4 shadow-lg border-0" style={{ backgroundColor: "#2e2e2e" }}>
-        <h1 className="mb-4" style={{ color: "#211b15" }}>📊 Gerador de tabelas personalizadas</h1>
+        <h1 className="mb-4" style={{ color: "#ffffff" }}>📊 Gerador de tabelas personalizadas</h1>
         <input
           type="file"
           className="form-control mb-3"
@@ -58,7 +58,7 @@ const App = () => {
         />
         <button
           className="btn btn-primary w-100 mb-3"
-          style={{ backgroundColor: "#2e2e2e", borderColor: "#211b15" }}
+          style={{ backgroundColor: "#2e2e2e", borderColor: "#ffffff" }}
           onClick={handleUpload}
         >
           Enviar Arquivo
