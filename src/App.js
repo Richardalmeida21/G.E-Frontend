@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="container mt-5 text-center">
       <div className="card p-4 shadow-lg border-0" style={{ backgroundColor: "#989a91" }}>
-        <h1 className="mb-4" style={{ color: "#2e2e2e" }}>📊 GERADOR DE TABELAS</h1>
+        <h1 className="mb-4 fw-bold" style={{ color: "#2e2e2e" }}>📊 GERADOR DE TABELAS</h1>
         <input
           type="file"
           className="form-control mb-3"
@@ -57,7 +57,7 @@ const App = () => {
           accept=".csv"
         />
         <button
-          className="btn btn-primary w-100 fw-bolder mb-3"
+          className="btn btn-primary w-100 text-uppercase fw-bold mb-3"
           style={{ backgroundColor: "#2e2e2e", borderColor: "#ffffff" }}
           onClick={handleUpload}
         >
