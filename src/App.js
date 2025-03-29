@@ -7,17 +7,28 @@ const App = () => {
   const [file, setFile] = useState(null);
   const [produtos, setProdutos] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Adicionando estado de carregamento
 
+  // Função para validar o formato do arquivo CSV
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    if (selectedFile && selectedFile.type !== "text/csv") {
+      setError("Por favor, selecione um arquivo CSV.");
+      setFile(null); // Limpar o arquivo
+    } else {
+      setError(""); // Limpar o erro se o arquivo for válido
+      setFile(selectedFile);
+    }
   };
 
+  // Função para upload do CSV
   const handleUpload = async () => {
     if (!file) {
       setError("Por favor, selecione um arquivo CSV.");
       return;
     }
     setError("");
+    setLoading(true); // Ativar o carregamento
 
     const formData = new FormData();
     formData.append("file", file);
@@ -30,12 +41,26 @@ const App = () => {
       );
       setProdutos(response.data);
     } catch (error) {
-      setError("Erro ao enviar o arquivo. Verifique o formato.");
+      if (error.response) {
+        setError(`Erro ao enviar o arquivo: ${error.response.data.message || 'Erro desconhecido'}`);
+      } else if (error.request) {
+        setError("Erro de comunicação com o servidor. Tente novamente.");
+      } else {
+        setError("Erro inesperado. Tente novamente.");
+      }
       console.error("Erro ao enviar CSV:", error);
+    } finally {
+      setLoading(false); // Desativar o carregamento
     }
   };
 
+  // Função para baixar a tabela como imagem
   const downloadImage = () => {
+    if (produtos.length === 0) {
+      alert("Nenhum produto para baixar como imagem.");
+      return;
+    }
+
     const tableElement = document.getElementById("produtos-table");
     html2canvas(tableElement).then((canvas) => {
       const image = canvas.toDataURL("image/png"); // Gera a imagem no formato PNG
@@ -60,8 +85,9 @@ const App = () => {
           className="btn btn-primary w-100 text-uppercase fw-bold mb-3"
           style={{ backgroundColor: "#2e2e2e", borderColor: "#ffffff" }}
           onClick={handleUpload}
+          disabled={loading} // Desabilita o botão enquanto carrega
         >
-          Enviar Arquivo
+          {loading ? "Enviando..." : "Enviar Arquivo"}
         </button>
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
