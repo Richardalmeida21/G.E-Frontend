@@ -21,8 +21,11 @@ const UploadCSV = ({ setEstoque }) => {
 
     try {
       const response = await api.post("/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+  headers: { "Content-Type": "multipart/form-data" },
+});
+console.log(response.data);  // Verifique o que está sendo retornado
+setEstoque(response.data);
+
       setEstoque(response.data);
       alert("Arquivo enviado com sucesso!");
     } catch (error) {
